@@ -5,6 +5,14 @@ Blender-based 3D scene renderer.
 Run this file using Blender's Python environment.
 """
 
+import os
+import sys
+
+sys.path.insert(
+    0,
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
+
 import bpy
 import math
 from mathutils import Vector
