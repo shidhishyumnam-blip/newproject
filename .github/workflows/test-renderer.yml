@@ -1,0 +1,33 @@
+
+name: Test 3D Renderer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository
+        uses: actions/checkout@v4
+
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+
+      - name: Check Blender
+        run: blender --version
+
+      - name: Render 3D preview
+        run: |
+          export PYTHONPATH="$GITHUB_WORKSPACE"
+          blender --background --python engine/renderer.py
+
+      - name: Save preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: 3D-renderer-preview
+          path: preview.png
+          
